@@ -1,0 +1,329 @@
+swagger: '2.0'
+info:
+  version: ''
+  title: Users-Notes application
+  description: ''
+host: 'localhost:8080'
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  '/Notes/{id}':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+    get:
+      operationId: GET-note
+      summary: Get Note
+      tags:
+        - Notes
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/note-output'
+          examples:
+            application/json:
+              text: ad mollit irure
+              date: eiusmod anim
+              user:
+                username: dolor elit esse
+    put:
+      operationId: PUT-note
+      summary: Update Note
+      tags:
+        - Notes
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/note-input'
+            example:
+              text: ad mollit irure
+              date: eiusmod anim
+              user:
+                username: dolor elit esse
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/note-output'
+          examples:
+            application/json:
+              text: ad mollit irure
+              date: eiusmod anim
+              user:
+                username: dolor elit esse
+    delete:
+      operationId: DELETE-note
+      summary: Delete Note
+      tags:
+        - Notes
+      responses:
+        '204':
+          description: ''
+  /Notes:
+    get:
+      operationId: LIST-notes
+      summary: List Notes
+      tags:
+        - Notes
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/note-output'
+          examples:
+            application/json:
+              - text: ad mollit irure
+                date: eiusmod anim
+                user:
+                  username: dolor elit esse
+    post:
+      operationId: POST-note
+      summary: Create Note
+      tags:
+        - Notes
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/note-input'
+            example:
+              text: ad mollit irure
+              date: eiusmod anim
+              user:
+                username: dolor elit esse
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/note-output'
+          examples:
+            application/json:
+              text: ad mollit irure
+              date: eiusmod anim
+              user:
+                username: dolor elit esse
+  '/Notes/search/findByDate{':
+    get:
+      operationId: GET_Notes-search-findByDate
+      summary: find notes by date
+      tags:
+        - Notes
+      parameters:
+        - name: date
+          in: query
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+              date:
+                type: string
+              user:
+                type: object
+                properties:
+                  username:
+                    type: string
+  '/Notes/search/findByUserUsername{':
+    get:
+      operationId: GET_Notes-search-findByUserUsername
+      summary: find notes by username
+      tags:
+        - Notes
+      parameters:
+        - name: username
+          in: query
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+              date:
+                type: string
+              user:
+                type: object
+                properties:
+                  username:
+                    type: string
+  '/Notes/search/findByText{':
+    get:
+      operationId: GET_Notes-search-findByText
+      summary: find notes by text
+      tags:
+        - Notes
+      parameters:
+        - name: text
+          in: query
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              text:
+                type: string
+              date:
+                type: string
+              user:
+                type: object
+                properties:
+                  user:
+                    type: string
+  '/Users/{id}':
+    parameters:
+      - name: id
+        in: path
+        required: true
+        type: string
+    get:
+      operationId: GET-user
+      summary: Get User
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/user-output'
+    put:
+      operationId: PUT-user
+      summary: Update User
+      tags:
+        - Users
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/user-input'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/user-output'
+    delete:
+      operationId: DELETE-user
+      summary: Delete User
+      tags:
+        - Users
+      responses:
+        '204':
+          description: ''
+  /Users:
+    get:
+      operationId: LIST-users
+      summary: List Users
+      tags:
+        - Users
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user-output'
+    post:
+      operationId: POST-user
+      summary: Create User
+      tags:
+        - Users
+      parameters:
+        - name: body
+          in: body
+          schema:
+            $ref: '#/definitions/user-input'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/user-output'
+  '/Users/search/findByUsername{':
+    get:
+      operationId: GET_Users-search-findByUsername
+      summary: find user by username
+      tags:
+        - Users
+      parameters:
+        - name: username
+          in: query
+          type: string
+      responses:
+        '200':
+          description: ''
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+definitions:
+  user-input:
+    title: User Input
+    type: object
+    properties:
+      username:
+        type: string
+    required:
+      - username
+  user-output:
+    title: User Output
+    allOf:
+      - type: object
+        properties:
+          username:
+            type: string
+      - $ref: '#/definitions/user-input'
+  note-input:
+    title: Note Input
+    type: object
+    properties:
+      text:
+        type: string
+      date:
+        type: string
+      user:
+        type: object
+        properties:
+          username:
+            type: string
+    example:
+      text: ad mollit irure
+      date: eiusmod anim
+      user:
+        username: dolor elit esse
+  note-output:
+    title: Note Output
+    allOf:
+      - type: object
+        properties:
+          text:
+            type: string
+          date:
+            type: string
+          user:
+            type: object
+            properties:
+              username:
+                type: string
+      - $ref: '#/definitions/note-input'
+    example:
+      text: ad mollit irure
+      date: eiusmod anim
+      user:
+        username: dolor elit esse
