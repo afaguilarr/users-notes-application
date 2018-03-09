@@ -87,7 +87,7 @@ public class Application implements CommandLineRunner {
 		//This will Update an User in the DB
 		User U = userRepository.findByUsername("XxPepexX");
 		userRepository.delete(U);
-		U.setUsername("Pepe");
+		U.setUsername("Pepe23");
 		userRepository.save(U);
 		
 		System.out.println("Notes found with findAll() after Updating:");
@@ -97,7 +97,7 @@ public class Application implements CommandLineRunner {
 		}
 		System.out.println();
 		
-		//This will delete some Notes
+		/*//This will delete some Notes
 		noteRepository.delete(noteRepository.findByDate((new LocalDate()).toString()));
 		System.out.println("Notes found with findAll() after Deleting:");
 		System.out.println("-------------------------------");
@@ -137,6 +137,6 @@ public class Application implements CommandLineRunner {
 		for (User User : userRepository.findAll()) {
 				System.out.println(User);
 		}
-		System.out.println();	
+		System.out.println();*/	
 	}
 }
